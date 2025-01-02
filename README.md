@@ -9,11 +9,11 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
 </p>
 <p>Zdrojové dáta pochádzajú z Kaggle datasetu dostupného <a href="https://www.kaggle.com/datasets/cleveranjosqlik/csv-northwind-database">tu</a>. Dataset obsahuje sedem hlavných tabuliek:</p>
 <ul>
-  <li>categories</li>
-  <li>products</li>
-  <li>suppliers</li>
-  <li>shippers</li>
-  <li>orders</li>
-  <li>customers</li>
-  <li>employees</li>
+  <li><code>categories</code></li>
+  <li><code>products</code></li>
+  <li><code>suppliers</code></li>
+  <li><code>shippers</code></li>
+  <li><code>orders</code></li>
+  <li><code>customers</code></li>
+  <li><code>employees</code></li>
 </ul>
