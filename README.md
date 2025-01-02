@@ -14,4 +14,6 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
   <li>suppliers</li>
   <li>shippers</li>
   <li>orders</li>
+  <li>customers</li>
+  <li>employees</li>
 </ul>
