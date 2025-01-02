@@ -22,7 +22,7 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
 <h3>ERD diagram</h3>
 <p>Surové dáta sú usporiadané v relačnom modeli, ktorý je znázornený na <b>entitno-relačnom diagrame (ERD):</b></p>
 <p align="center">
-  <img src="erd_schema.png" alt="ERD Schema">
+  <img src="Erd_Schema.png" alt="ERD Schema">
   <br>
   <em>Obrázok 1 Entitno-relačná schéma AmazonBooks</em>
 </p>
@@ -33,15 +33,15 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
 Navrhnutý bol **hviezdicový model (star schema)**, pre efektívnu analýzu kde centrálny bod predstavuje faktová tabuľka **`fact_orderdetails`**, ktorá je prepojená s nasledujúcimi dimenziami:
 - **`dim_products`**: Obsahuje podrobné informácie o produktoch (name, category, supplier_name,country,city).
 - **`dim_shippers`**: Obsahuje údaje o zasielateľoch(shipper name).
-- **`dim_employees`**: Obsahuje údaje o zamestnancoch (name, birth year, gender, nationality).
-- **`dim_customers`**: Obsahuje údaje o zákazníkoch (name, city, country, gender, nationality).
+- **`dim_employees`**: Obsahuje údaje o zamestnancoch (first name, last name, birth year).
+- **`dim_customers`**: Obsahuje údaje o zákazníkoch (name, city, country).
 - **`dim_date`**: Zahrňuje informácie o dátumoch objednavok (deň, mesiac, rok, štvrťrok).
 - **`dim_time`**: Obsahuje podrobné časové údaje (hodina, AM/PM).
 
 Štruktúra hviezdicového modelu je znázornená na diagrame nižšie. Diagram ukazuje prepojenia medzi faktovou tabuľkou a dimenziami, čo zjednodušuje pochopenie a implementáciu modelu.
 
 <p align="center">
-  <img src="starschema.png" alt="Star Schema">
+  <img src="Star_Schema.png" alt="Star Schema">
   <br>
   <em>Obrázok 2 Schéma hviezdy pre NorthWind</em>
 </p>
