@@ -21,4 +21,4 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
 <h3>1.1 Dátová architektúra</h3>
 <h3>ERD diagram</h3>
 <p>Surové dáta sú usporiadané v relačnom modeli, ktorý je znázornený na entitno-relačnom diagrame (ERD):</p>
-<img src="Northwind_ERD.png">Ikolaios</img>
+<img src="Northwind_ERD.png">Obrázok 1 Entitno-relačná schéma NorthWind</img>
