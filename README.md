@@ -4,3 +4,4 @@ Tento repozitár obsahuje implementáciu ETL procesu v Snowflake pre analýzu d�
 </p>
 <hr>
 <h2>1. Úvod a popis zdrojových dát</h2>
+<p>Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, zákazníkov a ich hodnotení. Táto analýza umožňuje identifikovať trendy v preferenciách zákazníkov, najpopulárnejšie produkty a správanie zákazníkov.</p>
