@@ -37,3 +37,11 @@ Navrhnutý bol **hviezdicový model (star schema)**, pre efektívnu analýzu kde
 - **`dim_customers`**: Obsahuje údaje o zákazníkoch (name, city, country, gender, nationality).
 - **`dim_date`**: Zahrňuje informácie o dátumoch objednavok (deň, mesiac, rok, štvrťrok).
 - **`dim_time`**: Obsahuje podrobné časové údaje (hodina, AM/PM).
+
+Štruktúra hviezdicového modelu je znázornená na diagrame nižšie. Diagram ukazuje prepojenia medzi faktovou tabuľkou a dimenziami, čo zjednodušuje pochopenie a implementáciu modelu.
+
+<p align="center">
+  <img src="starschema.png" alt="Star Schema">
+  <br>
+  <em>Obrázok 2 Schéma hviezdy pre AmazonBooks</em>
+</p>
