@@ -18,3 +18,4 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
   <li><code>employees</code></li>
 </ul>
 <p>Účelom ETL procesu bolo tieto dáta pripraviť, transformovať a sprístupniť pre viacdimenzionálnu analýzu.</p>
+<h3>1.1 Dátová architektúra</h3>
