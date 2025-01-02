@@ -32,6 +32,8 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
 
 Navrhnutý bol **hviezdicový model (star schema)**, pre efektívnu analýzu kde centrálny bod predstavuje faktová tabuľka **`fact_orderdetails`**, ktorá je prepojená s nasledujúcimi dimenziami:
 - **`dim_products`**: Obsahuje podrobné informácie o produktoch (name, category, supplier_name,country,city).
-- **`dim_users`**: Obsahuje demografické údaje o používateľoch, ako sú vekové kategórie, pohlavie, povolanie a vzdelanie.
-- **`dim_date`**: Zahrňuje informácie o dátumoch hodnotení (deň, mesiac, rok, štvrťrok).
+- **`dim_shippers`**: Obsahuje údaje o zasielateľoch(shipper name).
+- **`dim_employees`**: Obsahuje údaje o zamestnancoch (name, birth year, gender, nationality).
+- **`dim_customers`**: Obsahuje údaje o zákazníkoch (name, city, country, gender, nationality).
+- **`dim_date`**: Zahrňuje informácie o dátumoch objednavok (deň, mesiac, rok, štvrťrok).
 - **`dim_time`**: Obsahuje podrobné časové údaje (hodina, AM/PM).
