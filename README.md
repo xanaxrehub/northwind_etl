@@ -55,3 +55,16 @@ ETL proces pozostával z troch hlavných fáz: `extrahovanie` (Extract), `transf
 Dáta zo zdrojového datasetu (formát `.csv`) boli najprv nahraté do Snowflake prostredníctvom interného stage úložiska s názvom `my_stage`. Stage v Snowflake slúži ako dočasné úložisko na import alebo export dát. Vytvorenie stage bolo zabezpečené príkazom:
 
 #### Príklad kódu:
+```sql
+CREATE OR REPLACE STAGE my_stage;
+```
+Do stage boli následne nahraté súbory obsahujúce údaje o knihách, používateľoch, hodnoteniach, zamestnaniach a úrovniach vzdelania. Dáta boli importované do staging tabuliek pomocou príkazu `COPY INTO`. Pre každú tabuľku sa použil podobný príkaz:
+
+```sql
+COPY INTO occupations_staging
+FROM @my_stage/occupations.csv
+FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1);
+```
+
+---
+### **3.2 Transform (Transformácia dát)**
