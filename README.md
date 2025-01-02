@@ -26,3 +26,5 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
   <br>
   <em>Obrázok 1 Entitno-relačná schéma AmazonBooks</em>
 </p>
+---
+## **2 Dimenzionálny model**
