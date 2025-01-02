@@ -29,3 +29,9 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
 
 ---
 ## **2 Dimenzionálny model**
+
+Navrhnutý bol **hviezdicový model (star schema)**, pre efektívnu analýzu kde centrálny bod predstavuje faktová tabuľka **`fact_orderdetails`**, ktorá je prepojená s nasledujúcimi dimenziami:
+- **`dim_products`**: Obsahuje podrobné informácie o produktoch (name, category, supplier_name,country,city).
+- **`dim_users`**: Obsahuje demografické údaje o používateľoch, ako sú vekové kategórie, pohlavie, povolanie a vzdelanie.
+- **`dim_date`**: Zahrňuje informácie o dátumoch hodnotení (deň, mesiac, rok, štvrťrok).
+- **`dim_time`**: Obsahuje podrobné časové údaje (hodina, AM/PM).
