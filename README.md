@@ -134,3 +134,10 @@ GROUP BY CAST(OrderDate AS DATE),
          DATE_PART(week, OrderDate), 
          DATE_PART(quarter, OrderDate);
 ```
+`Fact_orderdetails` obsahuje údaje o detailoch objednávok, ktoré zahŕňajú transakčné dáta o produktoch, objednaných množstvách a ich cenách, ako aj odkazy na rôzne dimenzie ako produkt, zamestnanec, zákazník, dopravca, dátum a čas.
+
+Transformácia zahŕňala:
+- Priradenie jedinečného identifikátora detailu objednávky (`OrderDetailID`), ktorý jednoznačne identifikuje každú položku objednávky.
+- Spojenie dát z rôznych dimenzií (produkty, zamestnanci, zákazníci, dopravcovia, dátumy a časy) prostredníctvom vonkajších kľúčov, čím sa umožňuje efektívne prepojenie faktov (detailov objednávky) s príslušnými dimenziami.
+- Cena produktu a množstvo sú uložené ako metriky transakcie, ktoré umožňujú analýzu objednávok na rôznych úrovniach.
+Táto faktová tabuľka je vhodná pre analytické účely, ako sú analýza predaja, sledovanie objednávok podľa produktov a zákazníkov, a meranie výkonu zamestnancov alebo dopravcov. Vytvára sa zo zdrojových dát v tabuľke `orderdetails_staging` a umožňuje flexibilné a detailné analýzy, ktoré zahŕňajú údaje o predaji a objednávkach v rámci rôznych dimenzií (produkt, zamestnanec, zákazník, dopravca, dátum, čas).
