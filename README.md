@@ -91,3 +91,46 @@ Transformácia zahŕňala:
 - Transformáciu číselných hodnôt dňa v týždni a mesiaca na ich textové reprezentácie v slovenčine (napr. 1 = „Pondelok“, 1 = „Január“).
 
 Táto dimenzia je vhodná na analytické účely, ako napríklad skupinové agregácie, sezónne analýzy alebo vytváranie časových hierarchií (deň, mesiac, kvartál, rok). Dátumová dimenzia sa vytvára z údajov v tabuľke `orders_staging` a umožňuje efektívne prepojenie faktov s konkrétnymi časovými obdobiam.
+```sql
+CREATE TABLE DIM_DATE AS
+SELECT
+    ROW_NUMBER() OVER (ORDER BY CAST(OrderDate AS DATE)) AS DateID, 
+    CAST(OrderDate AS DATE) AS date,                    
+    DATE_PART(day, OrderDate) AS day,                   
+    DATE_PART(dow, OrderDate) + 1 AS dayOfWeek,        
+    CASE DATE_PART(dow, OrderDate) + 1
+        WHEN 1 THEN 'Pondelok'
+        WHEN 2 THEN 'Utorok'
+        WHEN 3 THEN 'Streda'
+        WHEN 4 THEN 'Štvrtok'
+        WHEN 5 THEN 'Piatok'
+        WHEN 6 THEN 'Sobota'
+        WHEN 7 THEN 'Nedeľa'
+    END AS dayOfWeekAsString,
+    DATE_PART(month, OrderDate) AS month,              
+    CASE DATE_PART(month, OrderDate)
+        WHEN 1 THEN 'Január'
+        WHEN 2 THEN 'Február'
+        WHEN 3 THEN 'Marec'
+        WHEN 4 THEN 'Apríl'
+        WHEN 5 THEN 'Máj'
+        WHEN 6 THEN 'Jún'
+        WHEN 7 THEN 'Júl'
+        WHEN 8 THEN 'August'
+        WHEN 9 THEN 'September'
+        WHEN 10 THEN 'Október'
+        WHEN 11 THEN 'November'
+        WHEN 12 THEN 'December'
+    END AS monthAsString,
+    DATE_PART(year, OrderDate) AS year,                
+    DATE_PART(week, OrderDate) AS week,               
+    DATE_PART(quarter, OrderDate) AS quarter           
+FROM orders_staging
+GROUP BY CAST(OrderDate AS DATE), 
+         DATE_PART(day, OrderDate), 
+         DATE_PART(dow, OrderDate), 
+         DATE_PART(month, OrderDate), 
+         DATE_PART(year, OrderDate), 
+         DATE_PART(week, OrderDate), 
+         DATE_PART(quarter, OrderDate);
+```
