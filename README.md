@@ -36,7 +36,6 @@ Navrhnutý bol **hviezdicový model (star schema)**, pre efektívnu analýzu kde
 - **`dim_employees`**: Obsahuje údaje o zamestnancoch (first name, last name, birth year).
 - **`dim_customers`**: Obsahuje údaje o zákazníkoch (name, city, country).
 - **`dim_date`**: Zahrňuje informácie o dátumoch objednavok (deň, mesiac, rok, štvrťrok).
-- **`dim_time`**: Obsahuje podrobné časové údaje (hodina, AM/PM).
 
 Štruktúra hviezdicového modelu je znázornená na diagrame nižšie. Diagram ukazuje prepojenia medzi faktovou tabuľkou a dimenziami, čo zjednodušuje pochopenie a implementáciu modelu.
 
