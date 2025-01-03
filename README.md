@@ -73,3 +73,12 @@ V tejto fáze boli dáta zo staging tabuliek vyčistené, transformované a oboh
 
 Dimenzie boli navrhnuté na poskytovanie kontextu pre faktovú tabuľku. 
 `Dim_employees` obsahuje údaje o zamestnancoch vrátane ich jedinečného identifikátora, mena, priezviska a roku narodenia. Transformácia zahŕňala premenovanie stĺpcov na zrozumiteľnejšie názvy (napr. FirstName na First_Name, LastName na Last_Name) a extrahovanie roku narodenia zo stĺpca dátumu narodenia. Táto dimenzia by mohla byť prispôsobená ako SCD 2, ak by bolo potrebné sledovať historické zmeny v údajoch zamestnancov, ako sú napríklad zmeny mena alebo iné osobné údaje v priebehu času. V súčasnej implementácii však uchováva len statické údaje.
+```sql
+CREATE TABLE dim_employees AS
+SELECT DISTINCT
+    e.EmployeeID,
+    e.FirstName as First_Name,
+    e.LastName as Last_Name,
+    YEAR(e.BirthDate) as Birth_Year,
+FROM employees_staging e;
+```
