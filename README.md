@@ -40,7 +40,7 @@ Navrhnutý bol **hviezdicový model (star schema)**, pre efektívnu analýzu kde
 Štruktúra hviezdicového modelu je znázornená na diagrame, ktorý ilustruje prepojenia medzi faktovou tabuľkou a jednotlivými dimenziami. Tento prístup uľahčuje pochopenie a implementáciu modelu.
 
 <p align="center">
-  <img src="Star_Schema.png" alt="Star Schema">
+  <img src="STAR_schema.png" alt="Star Schema">
   <br>
   <em>Obrázok 2 Schéma hviezdy pre NorthWind</em>
 </p>
