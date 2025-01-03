@@ -141,3 +141,24 @@ Transformácia zahŕňala:
 - Spojenie dát z rôznych dimenzií (produkty, zamestnanci, zákazníci, dopravcovia, dátumy a časy) prostredníctvom vonkajších kľúčov, čím sa umožňuje efektívne prepojenie faktov (detailov objednávky) s príslušnými dimenziami.
 - Cena produktu a množstvo sú uložené ako metriky transakcie, ktoré umožňujú analýzu objednávok na rôznych úrovniach.
 Táto faktová tabuľka je vhodná pre analytické účely, ako sú analýza predaja, sledovanie objednávok podľa produktov a zákazníkov, a meranie výkonu zamestnancov alebo dopravcov. Vytvára sa zo zdrojových dát v tabuľke `orderdetails_staging` a umožňuje flexibilné a detailné analýzy, ktoré zahŕňajú údaje o predaji a objednávkach v rámci rôznych dimenzií (produkt, zamestnanec, zákazník, dopravca, dátum, čas).
+```sql
+CREATE TABLE fact_orderdetails AS
+SELECT DISTINCT
+    od.OrderDetailID,
+    ps.Price AS ProductPrice,
+    od.Quantity AS ProductQuantity,
+    p.ProductID, 
+    e.EmployeeID, 
+    c.CustomerID, 
+    s.ShipperID, 
+    d.DateID, 
+    t.TimeID
+FROM orderdetails_staging od JOIN orders_staging o ON od.OrderID = o.OrderID
+JOIN products_staging ps ON od.ProductID = ps.ProductID
+JOIN dim_products p ON od.ProductID = p.ProductID
+JOIN dim_employees e ON o.EmployeeID = e.EmployeeID
+JOIN dim_customers c ON o.CustomerID = c.CustomerID
+JOIN dim_shippers s ON o.ShipperID = s.ShipperID
+JOIN dim_date d ON CAST(o.OrderDate as DATE) = d.date
+JOIN dim_time t ON o.OrderDate = t.timestamp;
+```
