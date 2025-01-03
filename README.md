@@ -92,7 +92,79 @@ SELECT DISTINCT
 FROM products_staging p
 JOIN categories_staging c ON p.CategoryID = c.CategoryID
 JOIN suppliers_staging s ON p.SupplierID = s.SupplierID;
+```
 
+Dimenzia `dim_shippers` je navrhnutá na uchovávanie informácií o dodávateľoch. Poskytuje kontext pre analýzu údajov súvisiacich s metódami dopravy a dodávkami tovarov. Transformácia zahŕňa spájanie informácií o dodávateľoch, ako sú ich identifikátory a názvy. Táto dimenzia je typu SCD Type 1, čo znamená, že ak dôjde k zmene informácií o dodávateľovi (napríklad zmena názvu alebo informácií o doprave), staré údaje sú jednoducho nahradené novými. História zmien sa neuchováva.
+```sql
+CREATE TABLE dim_shippers AS
+SELECT DISTINCT
+    s.ShipperID,
+    s.ShipperName
+FROM shippers_staging s;
+```
+Dimenzia `dim_customers` je navrhnutá na uchovávanie informácií o zákazníkoch. Transformácia zahŕňa pridanie údajov o zákazníkoch, ako sú ich mená, mestá a krajiny. Tieto údaje poskytujú kontext pre analýzu zákazníckych dát. Zákazníci sú identifikovaní prostredníctvom CustomerID. V tejto dimenzii nebolo vykonané žiadne ďalšie spracovanie alebo rozdelenie hodnôt, napríklad vekové kategórie. Táto dimenzia je typu SCD Type 1, čo znamená, že ak dôjde k zmene informácií o zákazníkovi (napríklad zmena mena alebo adresy), staré údaje budú nahradené novými. História zmien sa neuchováva.
+```sql
+CREATE TABLE dim_customers AS
+SELECT DISTINCT
+    c.CustomerID,
+    c.CustomerName,
+    c.City,
+    c.Country
+FROM customers_staging c;
+```
+
+Dimenzia `dim_employees` uchováva informácie o zamestnancoch. Transformácia zahŕňa pridanie údajov o zamestnancoch, ako sú ich meno, priezvisko a rok narodenia. `BirthYear` je odvodený z `BirthDate` (využitý výrazy YEAR(e.BirthDate) na extrakciu roka). V tejto dimenzii je vykonaná transformácia týkajúca sa dátumu narodenia zamestnanca. Rok narodenia sa extrahuje zo stĺpca BirthDate, aby sa mohol použiť pri analýzach na základe veku. Táto dimenzia je typu SCD Type 1, čo znamená, že ak dôjde k zmene informácií o zamestnancovi (napríklad zmena mena), staré údaje budú nahradené novými. História zmien sa neuchováva.
+```sql
+CREATE TABLE dim_employees AS
+SELECT DISTINCT
+    e.EmployeeID,
+    e.FirstName as First_Name,
+    e.LastName as Last_Name,
+    YEAR(e.BirthDate) as Birth_Year
+FROM employees_staging e;
+```
+
+Dimenzia `dim_date` je navrhnutá na uchovávanie informácií o dátumoch objednávok. Transformácia zahŕňa extrakciu dátumu z poľa OrderDate a rozdelenie dátumu do rôznych častí, ako sú deň, mesiac a rok. Tieto údaje poskytujú kontext pre časové analýzy a umožňujú sledovanie trendov na základe dátumu. Dátumová dimenzia sa používa na priradenie k ostatným tabuľkám (napr. objednávky, hodnotenia) na analýzu v čase.
+
+Táto dimenzia je typu SCD Type 0, čo znamená, že údaje o dátume sa považujú za statické a nezmeniteľné, a preto neexistuje potreba uchovávať históriu zmien. Ak je potrebné pridať nový dátum, bude jednoducho pridaný nový záznam do dimenzie, ale žiadne existujúce záznamy sa nemenia.
+```sql
+CREATE TABLE dim_date AS
+SELECT DISTINCT
+    ROW_NUMBER() OVER (ORDER BY CAST(OrderDate AS DATE)) AS DateID,
+    CAST(OrderDate AS DATE) AS date,
+    DATE_PART(year, OrderDate) AS year,
+    DATE_PART(month, OrderDate) AS month,
+    DATE_PART(day, OrderDate) AS day
+FROM orders_staging
+GROUP BY CAST(OrderDate AS DATE), 
+         DATE_PART(day, OrderDate),
+         DATE_PART(month, OrderDate), 
+         DATE_PART(year, OrderDate);
+```
+
+Faktová tabuľka `fact_orderdetails` obsahuje detailné údaje o objednávkach, ktoré zahŕňajú informácie ako cena produktu, množstvo a prepojenia s dimenziami ako produkty, zamestnanci, zákazníci, dopravcovia a dátumy. Táto tabuľka spája údaje z rôznych dimenzií, ako je `dim_products`, `dim_employees`, `dim_customers`, `dim_shippers` a `dim_date`, aby poskytla komplexný pohľad na objednávky.
+
+V tejto tabuľke je každému detailu objednávky priradený unikátny `OrderDetailID`, cena produktu je prevzatá z `products_staging`, pričom `ProductID` je prepojený s dimenziou `dim_products`. Množstvo produktov v objednávke je zobrazené ako `ProductQuantity`. `EmployeeID` a `CustomerID` sú priradené k zamestnancovi a zákazníkovi prostredníctvom dimenzií `dim_employees` a `dim_customers`, zatiaľ čo `ShipperID` je spojený s dopravcom z `dim_shippers`. Na záver, každý záznam je prepojený s konkrétnym dátumom cez `DateID` v dimenzii `dim_date`.
+```sql
+CREATE TABLE fact_orderdetails AS
+SELECT 
+    od.OrderDetailID,
+    ps.Price AS ProductPrice,
+    od.Quantity AS ProductQuantity,
+    p.ProductID, 
+    e.EmployeeID, 
+    c.CustomerID, 
+    s.ShipperID, 
+    d.DateID,
+    od.OrderID
+FROM orderdetails_staging od 
+JOIN orders_staging o ON od.OrderID = o.OrderID
+JOIN products_staging ps ON od.ProductID = ps.ProductID
+JOIN dim_products p ON od.ProductID = p.ProductID
+JOIN dim_employees e ON o.EmployeeID = e.EmployeeID
+JOIN dim_customers c ON o.CustomerID = c.CustomerID
+JOIN dim_shippers s ON o.ShipperID = s.ShipperID
+JOIN dim_date d ON CAST(o.OrderDate as DATE) = d.date;
 ```
 
 ---
