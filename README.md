@@ -183,6 +183,12 @@ ETL proces v Snowflake umožnil spracovanie pôvodných dát z formátu `.csv` d
 ---
 ## **4 Vizualizácia dát**
 
+<p align="center">
+  <img src="northwind_dashboard.png" alt="Northwind Dashboard">
+  <br>
+  <em>Obrázok 3 Dashboard AmazonBooks datasetu</em>
+</p>
+
 ### Graf 1: Top 10 najpredávanejších produktov
 Tento graf ukazuje 10 produktov, ktoré majú najvyšší počet objednávok. Umožňuje identifikovať, ktoré produkty sú najobľúbenejšie medzi zákazníkmi. Takéto informácie môžu byť užitočné pri plánovaní skladových zásob a marketingových stratégiách.
 
