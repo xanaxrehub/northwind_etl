@@ -270,3 +270,5 @@ COUNT(od.OrderDetailID) počíta počet objednávok z každého mesta.
 GROUP BY c.City zabezpečuje zoskupenie výsledkov podľa mesta.
 ORDER BY total_orders DESC zoradí mestá podľa počtu objednávok.
 ```
+
+## Ihor Shtefanets
