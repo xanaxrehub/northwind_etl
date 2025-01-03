@@ -82,3 +82,12 @@ SELECT DISTINCT
     YEAR(e.BirthDate) as Birth_Year,
 FROM employees_staging e;
 ```
+`Dim_date` obsahuje údaje o dátumoch vrátane jedinečného identifikátora dátumu (DateID), konkrétneho dátumu, dňa, dňa v týždni, názvu dňa v týždni, mesiaca, názvu mesiaca, roku, týždňa a kvartálu.
+
+Transformácia zahŕňala:
+
+Priradenie jedinečného identifikátora dátumu (DateID) pomocou funkcie ROW_NUMBER.
+Extrahovanie jednotlivých zložiek dátumu (deň, mesiac, rok, týždeň, kvartál) pomocou funkcie DATE_PART.
+Pridanie číselnej reprezentácie dňa v týždni (1 = Pondelok, 7 = Nedeľa).
+Transformáciu číselných hodnôt dňa v týždni a mesiaca na ich textové reprezentácie v slovenčine (napr. 1 = „Pondelok“, 1 = „Január“).
+Táto dimenzia je vhodná na analytické účely, ako napríklad skupinové agregácie, sezónne analýzy alebo vytváranie časových hierarchií (deň, mesiac, kvartál, rok). Dátumová dimenzia sa vytvára z údajov v tabuľke orders_staging a umožňuje efektívne prepojenie faktov s konkrétnymi časovými obdobiam.
