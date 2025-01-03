@@ -22,7 +22,7 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
 <h3>ERD diagram</h3>
 <p>Surové dáta sú usporiadané v relačnom modeli, ktorý je znázornený na <b>entitno-relačnom diagrame (ERD):</b></p>
 <p align="center">
-  <img src="Erd_Schema.png" alt="ERD Schema">
+  <img src="ERD_schema.png" alt="ERD Schema">
   <br>
   <em>Obrázok 1 Entitno-relačná schéma AmazonBooks</em>
 </p>
