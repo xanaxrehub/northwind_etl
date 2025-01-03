@@ -183,7 +183,7 @@ ETL proces v Snowflake umožnil spracovanie pôvodných dát z formátu `.csv` d
 ---
 ## **4 Vizualizácia dát**
 
-Graf 1: Top 10 najpredávanejších produktov
+### Graf 1: Top 10 najpredávanejších produktov
 Tento graf ukazuje 10 produktov, ktoré majú najvyšší počet objednávok. Umožňuje identifikovať, ktoré produkty sú najobľúbenejšie medzi zákazníkmi. Takéto informácie môžu byť užitočné pri plánovaní skladových zásob a marketingových stratégiách.
 
 ```sql
@@ -201,7 +201,7 @@ GROUP BY p.ProductName zabezpečuje, že výsledky budú zoskupené podľa názv
 ORDER BY total_orders DESC zoradí produkty podľa počtu objednávok, od najvyššieho po najnižší.
 ```
 
-Graf 2: Počet objednávok podľa zasielateľov
+### Graf 2: Počet objednávok podľa zasielateľov
 Tento graf ukazuje počet objednávok, ktoré boli doručené jednotlivými zasielateľmi. Pomáha to identifikovať, ktorí zasielatelia sú najvyťaženejší a môžu byť užitoční pri analýze dodávateľských reťazcov.
 ```sql
 SELECT 
@@ -217,7 +217,7 @@ GROUP BY s.ShipperName zabezpečuje zoskupenie podľa mena zasielateľa.
 ORDER BY total_orders DESC zoradí zasielateľov podľa počtu objednávok.
 ```
 
-Graf 3: Počet objednávok podľa rokov
+### Graf 3: Počet objednávok podľa rokov
 Tento graf ukazuje, ako sa počet objednávok mení v priebehu rokov. Získané údaje môžu byť použité na analýzu trendov a sezónnosti v obchodoch a objednávkach.
 ```sql
 SELECT 
@@ -233,7 +233,7 @@ GROUP BY d.year zoskupuje výsledky podľa roku.
 ORDER BY d.year zoradí výsledky podľa rokov vzostupne.
 ```
 
-Graf 4: Počet objednávok podľa dní
+### Graf 4: Počet objednávok podľa dní
 Tento graf ukazuje, ako sa počet objednávok mení počas rôznych dní v mesiaci. Pomôže identifikovať najaktívnejšie dni, ktoré môžu ovplyvniť rozhodovanie o marketingových kampaniach alebo skladových zásobách.
 ```sql
 SELECT 
@@ -249,7 +249,7 @@ GROUP BY d.day zoskupuje výsledky podľa dňa.
 ORDER BY total_orders DESC zoradí dni podľa počtu objednávok.
 ```
 
-Graf 5: Počet objednávok podľa miest zákazníkov
+### Graf 5: Počet objednávok podľa miest zákazníkov
 Tento graf zobrazuje, ktoré mestá majú najväčší počet objednávok. Tieto informácie môžu byť využité na analýzu geografických preferencií zákazníkov a plánovanie marketingových aktivít v jednotlivých regiónoch.
 ```sql
 SELECT 
