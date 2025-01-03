@@ -162,3 +162,17 @@ JOIN dim_shippers s ON o.ShipperID = s.ShipperID
 JOIN dim_date d ON CAST(o.OrderDate as DATE) = d.date
 JOIN dim_time t ON o.OrderDate = t.timestamp;
 ```
+
+---
+### **3.3 Load (Načítanie dát)**
+
+Po úspešnom vytvorení dimenzií a faktovej tabuľky boli dáta nahraté do finálnej štruktúry. Na záver boli staging tabuľky odstránené, aby sa optimalizovalo využitie úložiska:
+```sql
+DROP TABLE IF EXISTS books_staging;
+DROP TABLE IF EXISTS education_levels_staging;
+DROP TABLE IF EXISTS occupations_staging;
+DROP TABLE IF EXISTS ratings_staging;
+DROP TABLE IF EXISTS users_staging;
+```
+ETL proces v Snowflake umožnil spracovanie pôvodných dát z formátu .csv do viacdimenzionálneho modelu typu hviezda, ktorý bol špecificky prispôsobený pre databázu NorthWind. Tento proces zahŕňal čistenie, obohacovanie a reorganizáciu údajov z rôznych tabuliek ako Orders, Customers, Employees, Products, a Shippers. Výsledný model umožňuje detailnú analýzu obchodných transakcií, predaja produktov, preferencií zákazníkov a správania zamestnancov, pričom poskytuje základ pre vizualizácie a reporty, ktoré sa dajú využiť pre optimalizáciu obchodných procesov, zlepšenie zákazníckej skúsenosti a analýzu výkonnosti.
+---
