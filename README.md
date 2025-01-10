@@ -24,7 +24,7 @@ Cieľom semestrálneho projektu je analyzovať dáta týkajúce sa produktov, z�
 <p align="center">
   <img src="ERD_schema.png" alt="ERD Schema">
   <br>
-  <em>Obrázok 1 Entitno-relačná schéma AmazonBooks</em>
+  <em>Obrázok 1 Entitno-relačná schéma NorthWind</em>
 </p>
 
 ---
@@ -186,7 +186,7 @@ ETL proces v Snowflake umožnil spracovanie pôvodných dát z formátu `.csv` d
 <p align="center">
   <img src="northwind_dashboard.png" alt="Northwind Dashboard">
   <br>
-  <em>Obrázok 3 Dashboard AmazonBooks datasetu</em>
+  <em>Obrázok 3 Dashboard NorthWind datasetu</em>
 </p>
 
 ### Graf 1: Top 10 najpredávanejších produktov
